@@ -10,18 +10,19 @@ connectDB();
 
 const app = express();
 
-// CORS Configuration
+// CORS Configuration - allow your frontend origins here
 app.use(cors({
   origin: [
-    "http://localhost:5173",
-    "http://localhost:5174",
-    "https://insuretech.netlify.app",
-    "https://incredible-jelly-3c0529.netlify.app", // Add this
+    "http://localhost:5173",                      // Vite dev frontend default
+    "http://localhost:5174",                      // Sometimes Vite picks another port
+    "http://192.168.29.160:5000",                 // Your frontend local IP with port
+    "https://insurance-project-admin.onrender.com", // Your deployed admin frontend URL
+    "https://insurance-backend-jiuc.onrender.com"   // Your deployed backend URL (for completeness)
   ],
-  methods: ["GET", "POST", "PUT", "DELETE"],
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   credentials: true,
+  optionsSuccessStatus: 204
 }));
-
 
 // Middleware to parse JSON requests, with payload size limit
 app.use(express.json({ limit: "50mb" }));
